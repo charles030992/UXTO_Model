@@ -12,7 +12,17 @@ class Transaction {
             }
         }
 
+    
+
+    // Sumar los amounts de los inputUTXOs y los outputUTXOs
+    const inputTotal = this.inputUTXOs.reduce((sum, utxo) => sum + utxo.amount, 0);
+    const outputTotal = this.outputUTXOs.reduce((sum, utxo) => sum + utxo.amount, 0);
+
+    // Verificar hay suficiente en los inputUTXOs
+    if (inputTotal < outputTotal) {
+        throw new Error("Insufficient input UTXOs!");
     }
+}
 }
 
 module.exports = Transaction;
